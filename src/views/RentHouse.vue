@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Map from '@/components/Map.vue';
+import VMap from '@/components/VMap.vue';
 </script>
 
 <template>
   <h1>
     Choose a house
   </h1>
-  <Map />
+  <VMap />
 </template>
 
 <style scoped lang="scss">

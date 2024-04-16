@@ -5,16 +5,20 @@
  */
 
 // Components
-import App from './App.vue'
+import App from "./App.vue";
 
 // Composables
-import { createApp } from 'vue'
+import { createApp } from "vue";
 
 // Plugins
-import { registerPlugins } from '@/plugins'
+import { registerPlugins } from "@/plugins";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./plugins/firebase";
 
-const app = createApp(App)
+initializeApp(firebaseConfig);
 
-registerPlugins(app)
+const app = createApp(App);
 
-app.mount('#app')
+registerPlugins(app);
+
+app.mount("#app");

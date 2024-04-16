@@ -1,13 +1,21 @@
 // Composables
 import { createRouter, createWebHistory } from "vue-router";
 import RentHouse from 'views/RentHouse.vue';
-import App from "@/App.vue";
+import Authorization from '@/views/Authorization.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
+    component: Authorization,
+  },
+  {
+    path: '/rent',
     component: RentHouse,
   },
+  {
+    path: '/:catchAll(.*)', 
+    redirect: '/login',
+  }
 ]
 
 const router = createRouter({
