@@ -24,15 +24,19 @@ body {
 }
 
 #app {
-  max-width: 1280px;
+  max-width: 1824px;
   min-height: 100vh;
   width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
   text-align: center;
 
-
   .v-btn {
     z-index: 2001;
+    height: auto;
+  }
+
+  .v-field--variant-solo {
+    box-shadow: none;
 }
 }

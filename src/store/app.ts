@@ -1,18 +1,13 @@
 // Utilities
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { supabase } from "@/plugins/supabase";
+import { User } from "@supabase/supabase-js";
 
-export const useAppStore = defineStore("app", () => {
+
+export const useAppStore = defineStore("mainStore", () => {
   const isLogedIn = ref(false);
-  const user = ref({data: {}, loggedIn: false});
+  const user = ref<User>();
 
-  function SET_LOGGED_IN(value: boolean) {
-    user.value.loggedIn = value;
-  }
-
-  function SET_USER(data: {}) {
-    user.value.data = data;
-  }
-
-  return { isLogedIn, user, SET_LOGGED_IN, SET_USER };
+  return { isLogedIn, user };
 });

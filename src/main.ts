@@ -12,10 +12,6 @@ import { createApp } from "vue";
 
 // Plugins
 import { registerPlugins } from "@/plugins";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "./plugins/firebase";
-
-initializeApp(firebaseConfig);
 
 const app = createApp(App);
 

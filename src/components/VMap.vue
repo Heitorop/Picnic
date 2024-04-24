@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { lightGreen, whiteColor } from "@/styles/variables";
 import { ref, computed, Ref } from "vue";
-import PlusIcon from "@/ui/PlusIcon.vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import { lightGreen, whiteColor } from "@/styles/variables";
 import { Anchor, Menu } from "@/types";
+import PlusIcon from "@/ui/PlusIcon.vue";
 
 // menu logic
 
