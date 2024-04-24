@@ -35,7 +35,7 @@ const { lg, xl, xxl } = useDisplay()
     display: flex;
     align-items: center;
     background-color: $background-color;
-    padding: 130px 220px;
+    padding: 130px 180px;
     border-radius: 24px;
     width: 100%;
     max-width: 984px;
