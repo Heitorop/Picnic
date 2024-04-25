@@ -21,7 +21,7 @@ const logout = () => {
   <div class="header">
     <img :src="logo" alt="logo" />
     <div v-if="user">
-      {{ user.user_metadata.name }}
+      {{ user.user_metadata.name || user.email }}
       <v-btn @click="logout">Log out</v-btn>
     </div>
     <v-btn

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import * as yup from "yup";
 import { useRouter } from "vue-router";
+import { useForm } from "vee-validate";
 import { whiteColor, lightGreen } from "@/styles/variables";
 import { useAppStore } from "@/store/app";
 
@@ -8,16 +10,13 @@ const $router = useRouter();
 
 const appStore = useAppStore();
 
-const emailField = ref("");
-const name = ref("");
-const password = ref("");
 // const errors = ref();
 const isReg = ref(false);
 
 // create account
 const createAccount = async () => {
   const { error } = await appStore.createAccount(
-    emailField.value,
+    email.value,
     name.value,
     password.value
   );
@@ -30,7 +29,7 @@ const createAccount = async () => {
 };
 // login
 const login = async () => {
-  const { error } = await appStore.login(emailField.value, password.value);
+  const { error } = await appStore.login(email.value, password.value);
   if (error) {
     // errors.value = error;
   } else {
@@ -39,28 +38,42 @@ const login = async () => {
   }
 };
 
-const onSubmit = () => {
+// validation
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  name: yup.string().nullable(),
+  password: yup.string().min(6).required(),
+});
+
+const { errors, handleSubmit, defineField } = useForm({
+  validationSchema: schema,
+});
+
+const onSubmit = handleSubmit(() => {
   isReg.value ? createAccount() : login();
-};
+});
+
+const [email] = defineField("email");
+const [name] = defineField("name");
+const [password] = defineField("password");
 </script>
 
 <template>
   <v-form fast-fail @submit.prevent="onSubmit">
     <fieldset>
       <h3>Email</h3>
-      <label for="email">Email</label>
       <v-text-field
-        v-model="emailField"
+        v-model="email"
         variant="solo"
         rounded
         :bg-color="whiteColor"
         id="email"
         clearable
       />
+      <span v-if="errors.email">{{ errors.email }}</span>
       <div v-if="isReg">
         <h3>Name</h3>
-        <label for="name">Email</label>
-
         <v-text-field
           v-model="name"
           variant="solo"
@@ -69,10 +82,10 @@ const onSubmit = () => {
           id="name"
           clearable
         />
+        <span v-if="errors.name">{{ errors.name }}</span>
       </div>
       <v-divider />
       <h3>Password</h3>
-      <label for="password">Password</label>
       <v-text-field
         v-model="password"
         variant="solo"
@@ -82,6 +95,7 @@ const onSubmit = () => {
         clearable
         type="password"
       />
+      <span v-if="errors.password">{{ errors.password }}</span>
       <!-- <div v-if="errors">{{ errors }}</div> -->
     </fieldset>
     <div>
@@ -141,9 +155,9 @@ const onSubmit = () => {
   h3 {
     font-size: 40px;
     line-height: 46px;
+    padding-bottom: 10px;
   }
 
-  label,
   p {
     font-size: 16px;
     line-height: 22px;
